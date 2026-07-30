@@ -64,9 +64,12 @@ jobs:
       # --------------------
       # Build Image
       # --------------------
-      - name: Build Image
+
+
+      - name: Build image
         run: |
-          docker build -t $IMAGE_NAME:${{ github.sha }} ./app
+          IMAGE=ghcr.io/yeswanthteja1010/ledger-api:${{ github.sha }}
+          docker build -t "$IMAGE" ./app
 
       # --------------------
       # Image Scan
