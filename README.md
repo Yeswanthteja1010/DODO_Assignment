@@ -41,3 +41,23 @@ Python 3.6 Base Image	    End of Life
 Vulnerable Dependencies	    Multiple CVEs
 Root Container	            Privilege Escalation Risk
 
+
+### Security Policy Enforcement
+
+An intentionally insecure deployment was tested:
+
+- Used nginx:latest
+- Missing runAsNonRoot
+- Missing seccompProfile
+- Missing capabilities drop
+- Missing allowPrivilegeEscalation=false
+
+The deployment was rejected by:
+
+1. Kubernetes Pod Security Standards (restricted)
+2. Kyverno admission policies
+
+Result:
+
+Deployment creation denied before reaching the cluster.
+
