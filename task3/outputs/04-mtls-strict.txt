@@ -1,0 +1,11 @@
+Pod: reporting-c6464bc46-w24bw
+   Pod Revision: default
+   Pod does not expose ports
+--------------------
+Service: reporting
+   Port:  80/auto-detect targets pod port 8080
+--------------------
+Effective PeerAuthentication:
+   Workload mTLS mode: STRICT
+Applied PeerAuthentication:
+   payments-strict-mtls.payments

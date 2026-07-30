@@ -1,0 +1,3 @@
+NAME                        POD-SELECTOR     AGE
+allow-reporting-to-ledger   app=ledger-api   11s
+default-deny-ingress        <none>           11s

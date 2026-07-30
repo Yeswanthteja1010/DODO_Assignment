@@ -1,0 +1,5 @@
+NAME                                                   CLUSTER        ISTIOD                      VERSION     SUBSCRIBED TYPES
+istio-ingressgateway-5fdd5ff474-htllp.istio-system     Kubernetes     istiod-5688cf5cb9-fh866     1.30.3      3 (CDS,LDS,EDS)
+ledger-api-8557bb7cf-ctdnk.payments                    Kubernetes     istiod-5688cf5cb9-fh866     1.30.3      4 (CDS,LDS,EDS,RDS)
+ledger-api-8557bb7cf-hdkjd.payments                    Kubernetes     istiod-5688cf5cb9-fh866     1.30.3      4 (CDS,LDS,EDS,RDS)
+reporting-c6464bc46-w24bw.payments                     Kubernetes     istiod-5688cf5cb9-fh866     1.30.3      4 (CDS,LDS,EDS,RDS)

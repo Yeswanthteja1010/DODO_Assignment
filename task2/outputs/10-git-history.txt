@@ -1,0 +1,5 @@
+00c7304 Complete Task 2 - Secure CI/CD pipeline and GitOps
+bac8370 Remove old workflow
+d31e197 Fix GHCR image name
+0de61ee Task 2 - Secure CI/CD pipeline and GitOps
+51d0491 Task 1 - Harden ledger-api deployment

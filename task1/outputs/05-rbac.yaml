@@ -1,0 +1,42 @@
+apiVersion: v1
+items:
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: Role
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"rbac.authorization.k8s.io/v1","kind":"Role","metadata":{"annotations":{},"name":"ledger-api-role","namespace":"payments"},"rules":[{"apiGroups":[""],"resources":["configmaps"],"verbs":["get"]}]}
+    creationTimestamp: "2026-07-29T20:16:52Z"
+    name: ledger-api-role
+    namespace: payments
+    resourceVersion: "22651"
+    uid: fb3773d7-10c9-48c3-8869-50a402bc7a07
+  rules:
+  - apiGroups:
+    - ""
+    resources:
+    - configmaps
+    verbs:
+    - get
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: RoleBinding
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"rbac.authorization.k8s.io/v1","kind":"RoleBinding","metadata":{"annotations":{},"name":"ledger-api-binding","namespace":"payments"},"roleRef":{"apiGroup":"rbac.authorization.k8s.io","kind":"Role","name":"ledger-api-role"},"subjects":[{"kind":"ServiceAccount","name":"ledger-api-sa","namespace":"payments"}]}
+    creationTimestamp: "2026-07-29T20:16:52Z"
+    name: ledger-api-binding
+    namespace: payments
+    resourceVersion: "22652"
+    uid: cbb28fec-c5bb-4a33-8faf-0d06bbc7d80a
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: Role
+    name: ledger-api-role
+  subjects:
+  - kind: ServiceAccount
+    name: ledger-api-sa
+    namespace: payments
+kind: List
+metadata:
+  resourceVersion: ""

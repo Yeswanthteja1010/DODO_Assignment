@@ -1,0 +1,4 @@
+NAME                         READY   STATUS    RESTARTS   AGE
+ledger-api-8557bb7cf-ctdnk   2/2     Running   0          98m
+ledger-api-8557bb7cf-hdkjd   2/2     Running   0          98m
+reporting-c6464bc46-w24bw    2/2     Running   0          31m

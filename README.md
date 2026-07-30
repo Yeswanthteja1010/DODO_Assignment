@@ -1,63 +1,87 @@
-# ledger-api
+# Dodo Payments Security & Platform Engineering Assessment
 
-Payments microservice for tokenising PANs and serving transaction metadata.
-Deployed on Kubernetes in the `payments` namespace.
+Author: Yeswanth Teja Karanam
 
-## Endpoints
+This repository contains my solution for the Dodo Payments DevOps / Platform Security assessment.
 
-| Method | Path            | Description                          |
-|--------|-----------------|--------------------------------------|
-| GET    | `/health`       | Liveness check                       |
-| POST   | `/tokenize`     | `{"pan": "..."}` → opaque token      |
-| GET    | `/transactions` | Recent transaction records           |
-| POST   | `/import`       | Import a YAML configuration blob     |
-| GET    | `/fetch?url=`   | Fetch a remote resource by URL       |
+## Assessment Overview
 
+### Task 1 – Secure Kubernetes Deployment
+Implemented a production-grade deployment of ledger-api with:
 
+- Kubernetes Deployment & Services
+- ConfigMaps
+- Ingress
+- Service Accounts
+- RBAC
+- Liveness & Readiness Probes
+- Resource Requests & Limits
+- Non-root Containers
+- Read-only Filesystem
+- Dropped Linux Capabilities
+- RuntimeDefault Seccomp Profile
+- Sealed Secrets
+- Kyverno Admission Policies
+- Pod Security Restricted Enforcement
 
-ledger-api does not require access to the Kubernetes API.
-Therefore no Role or RoleBinding has been granted.
-A dedicated ServiceAccount with zero permissions is used.
+See [Task 1](./task1)
 
-Original Dockerfile:
-- Python 3.6 (EOL)
-- Root user
+---
 
-Hardened Dockerfile:
-- Python 3.12
-- Dedicated non-root user (UID 10001)
-- Least privilege execution
+### Task 2 – Secure CI/CD & GitOps
 
-![alt text](image.png)
+Implemented:
 
-Replaced unsafe yaml.load() with yaml.safe_load() to prevent arbitrary object deserialization.
+- GitHub Actions CI Pipeline
+- Container Build & Push to GHCR
+- Security Scanning Pipeline
+- Trivy Vulnerability Scanning
+- GitOps Deployment using ArgoCD
+- Security Gate Documentation
+- Fail Policy Documentation
 
-Security Findings in Original Application
-Finding	                    Risk
-Hardcoded Stripe API Key	Secret Exposure
-Hardcoded DB Password	    Secret Exposure
-yaml.load()	                Unsafe Deserialization
-Python 3.6 Base Image	    End of Life
-Vulnerable Dependencies	    Multiple CVEs
-Root Container	            Privilege Escalation Risk
+See [Task 2](./task2)
 
+---
 
-### Security Policy Enforcement
+### Task 3 – Service Mesh & Zero Trust
 
-An intentionally insecure deployment was tested:
+Implemented:
 
-- Used nginx:latest
-- Missing runAsNonRoot
-- Missing seccompProfile
-- Missing capabilities drop
-- Missing allowPrivilegeEscalation=false
+- Istio Service Mesh
+- STRICT mTLS
+- SPIFFE Identity-based Authorization
+- Default-Deny Authorization Policy
+- NetworkPolicy Segmentation
+- Authorized Service Access
+- Unauthorized Service Blocking
+- Workload Certificate Validation
 
-The deployment was rejected by:
+See [Task 3](./task3)
 
-1. Kubernetes Pod Security Standards (restricted)
-2. Kyverno admission policies
+---
 
-Result:
+### Task 4 – Reconnaissance & Penetration Testing
 
-Deployment creation denied before reaching the cluster.
+To be completed.
+See [Task 4](./task4)
 
+---
+
+## Repository Structure
+
+```text
+task1/
+task2/
+task3/
+task4/
+```
+
+## Evidence
+
+Screenshots and command outputs are stored inside each task folder under:
+
+```text
+screenshots/
+outputs/
+```

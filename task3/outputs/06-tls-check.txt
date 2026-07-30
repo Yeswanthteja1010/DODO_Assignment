@@ -1,0 +1,11 @@
+Pod: ledger-api-8557bb7cf-ctdnk
+   Pod Revision: default
+   Pod Ports: 8080 (ledger-api)
+--------------------
+Service: ledger-api
+   Port: http 8080/HTTP targets pod port 8080
+--------------------
+Effective PeerAuthentication:
+   Workload mTLS mode: STRICT
+Applied PeerAuthentication:
+   payments-strict-mtls.payments

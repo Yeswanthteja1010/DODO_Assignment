@@ -1,0 +1,202 @@
+apiVersion: v1
+items:
+- apiVersion: kyverno.io/v1
+  kind: ClusterPolicy
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"kyverno.io/v1","kind":"ClusterPolicy","metadata":{"annotations":{},"name":"disallow-latest-tag"},"spec":{"background":true,"rules":[{"match":{"any":[{"resources":{"kinds":["Pod"]}}]},"name":"require-image-tag","validate":{"message":"Using latest tag is not allowed.","pattern":{"spec":{"containers":[{"image":"!*:latest"}]}}}}],"validationFailureAction":"Enforce"}}
+    creationTimestamp: "2026-07-29T20:32:34Z"
+    generation: 1
+    name: disallow-latest-tag
+    resourceVersion: "35914"
+    uid: 2cc8d6d2-2242-4216-bc40-6477ab727f7d
+  spec:
+    admission: true
+    background: true
+    emitWarning: false
+    rules:
+    - match:
+        any:
+        - resources:
+            kinds:
+            - Pod
+      name: require-image-tag
+      skipBackgroundRequests: true
+      validate:
+        allowExistingViolations: true
+        message: Using latest tag is not allowed.
+        pattern:
+          spec:
+            containers:
+            - image: '!*:latest'
+    validationFailureAction: Enforce
+  status:
+    autogen:
+      rules:
+      - match:
+          any:
+          - resources:
+              kinds:
+              - apps/v1/DaemonSet
+              - apps/v1/Deployment
+              - batch/v1/Job
+              - apps/v1/ReplicaSet
+              - v1/ReplicationController
+              - apps/v1/StatefulSet
+          resources: {}
+        name: autogen-require-image-tag
+        skipBackgroundRequests: true
+        validate:
+          allowExistingViolations: true
+          message: Using latest tag is not allowed.
+          pattern:
+            spec:
+              template:
+                spec:
+                  containers:
+                  - image: '!*:latest'
+      - match:
+          any:
+          - resources:
+              kinds:
+              - batch/v1/CronJob
+          resources: {}
+        name: autogen-cronjob-require-image-tag
+        skipBackgroundRequests: true
+        validate:
+          allowExistingViolations: true
+          message: Using latest tag is not allowed.
+          pattern:
+            spec:
+              jobTemplate:
+                spec:
+                  template:
+                    spec:
+                      containers:
+                      - image: '!*:latest'
+    conditions:
+    - lastTransitionTime: "2026-07-30T11:19:16Z"
+      message: Ready
+      reason: Succeeded
+      status: "True"
+      type: Ready
+    rulecount:
+      generate: 0
+      mutate: 0
+      validate: 1
+      verifyimages: 0
+    validatingadmissionpolicy:
+      generated: false
+      message: skip generating ValidatingAdmissionPolicy for non CEL rules.
+- apiVersion: kyverno.io/v1
+  kind: ClusterPolicy
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"kyverno.io/v1","kind":"ClusterPolicy","metadata":{"annotations":{},"name":"disallow-root"},"spec":{"background":true,"rules":[{"match":{"any":[{"resources":{"kinds":["Pod"]}}]},"name":"require-non-root","validate":{"message":"Containers must not run as root.","pattern":{"spec":{"securityContext":{"runAsNonRoot":true}}}}}],"validationFailureAction":"Enforce"}}
+    creationTimestamp: "2026-07-29T20:30:02Z"
+    generation: 2
+    name: disallow-root
+    resourceVersion: "78651"
+    uid: 296c54d7-3a71-49dd-9141-4ed7f6c96502
+  spec:
+    admission: true
+    background: true
+    emitWarning: false
+    rules:
+    - exclude:
+        any:
+        - resources:
+            namespaces:
+            - istio-system
+      match:
+        any:
+        - resources:
+            kinds:
+            - Pod
+      name: require-non-root
+      skipBackgroundRequests: true
+      validate:
+        allowExistingViolations: true
+        message: Containers must not run as root.
+        pattern:
+          spec:
+            securityContext:
+              runAsNonRoot: true
+    validationFailureAction: Enforce
+  status:
+    autogen:
+      rules:
+      - exclude:
+          any:
+          - resources:
+              namespaces:
+              - istio-system
+          resources: {}
+        match:
+          any:
+          - resources:
+              kinds:
+              - apps/v1/DaemonSet
+              - apps/v1/Deployment
+              - batch/v1/Job
+              - apps/v1/ReplicaSet
+              - v1/ReplicationController
+              - apps/v1/StatefulSet
+          resources: {}
+        name: autogen-require-non-root
+        skipBackgroundRequests: true
+        validate:
+          allowExistingViolations: true
+          message: Containers must not run as root.
+          pattern:
+            spec:
+              template:
+                spec:
+                  securityContext:
+                    runAsNonRoot: true
+      - exclude:
+          any:
+          - resources:
+              kinds:
+              - batch/v1/CronJob
+              namespaces:
+              - istio-system
+          resources: {}
+        match:
+          any:
+          - resources:
+              kinds:
+              - batch/v1/CronJob
+          resources: {}
+        name: autogen-cronjob-require-non-root
+        skipBackgroundRequests: true
+        validate:
+          allowExistingViolations: true
+          message: Containers must not run as root.
+          pattern:
+            spec:
+              jobTemplate:
+                spec:
+                  template:
+                    spec:
+                      securityContext:
+                        runAsNonRoot: true
+    conditions:
+    - lastTransitionTime: "2026-07-30T11:19:16Z"
+      message: Ready
+      reason: Succeeded
+      status: "True"
+      type: Ready
+    rulecount:
+      generate: 0
+      mutate: 0
+      validate: 1
+      verifyimages: 0
+    validatingadmissionpolicy:
+      generated: false
+      message: skip generating ValidatingAdmissionPolicy for non CEL rules.
+kind: List
+metadata:
+  resourceVersion: ""

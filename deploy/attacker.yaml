@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: attacker
+  namespace: payments
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: attacker
+
+  template:
+    metadata:
+      labels:
+        app: attacker
+
+    spec:
+      serviceAccountName: attacker-sa
+
+      securityContext:
+        runAsNonRoot: true
+        seccompProfile:
+          type: RuntimeDefault
+
+      containers:
+      - name: attacker
+        image: curlimages/curl:8.8.0
+
+        securityContext:
+          allowPrivilegeEscalation: false
+          runAsNonRoot: true
+          runAsUser: 1000
+          capabilities:
+            drop:
+            - ALL
+
+        command:
+        - sleep
+        - infinity

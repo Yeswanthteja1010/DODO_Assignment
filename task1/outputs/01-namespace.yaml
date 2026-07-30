@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","kind":"Namespace","metadata":{"annotations":{},"labels":{"pod-security.kubernetes.io/audit":"restricted","pod-security.kubernetes.io/enforce":"restricted","pod-security.kubernetes.io/warn":"restricted"},"name":"payments"}}
+  creationTimestamp: "2026-07-29T19:09:08Z"
+  labels:
+    istio-injection: enabled
+    kubernetes.io/metadata.name: payments
+    pod-security.kubernetes.io/audit: restricted
+    pod-security.kubernetes.io/enforce: privileged
+    pod-security.kubernetes.io/warn: restricted
+  name: payments
+  resourceVersion: "89259"
+  uid: cc4d7389-c73f-4f3d-a7cb-4bb362915345
+spec:
+  finalizers:
+  - kubernetes
+status:
+  phase: Active

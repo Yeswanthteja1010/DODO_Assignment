@@ -1,0 +1,2 @@
+NAME       STATUS   AGE   LABELS
+payments   Active   24h   istio-injection=enabled,kubernetes.io/metadata.name=payments,pod-security.kubernetes.io/audit=restricted,pod-security.kubernetes.io/enforce=privileged,pod-security.kubernetes.io/warn=restricted

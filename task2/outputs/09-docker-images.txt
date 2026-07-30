@@ -1,0 +1,5 @@
+IMAGE                                                                                  ID             DISK USAGE   CONTENT SIZE   EXTRA
+hello-world:latest                                                                     c3cbe1cc1aa5       25.9kB         9.49kB   U    
+kindest/node@sha256:3489c7674813ba5d8b1a9977baea8a6e553784dab7b84759d1014dbd78f7ebd5   3489c7674813       1.31GB          383MB   U    
+ledger-api:v1                                                                          18ec096a1f60        205MB         50.4MB        
+ledger-api:v2                                                                          05694a70c4cd        206MB           50MB        
